@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:microsoft_todo/main.dart';
 
 class TodoListWidget extends StatelessWidget {
 
@@ -15,7 +16,14 @@ class TodoListWidget extends StatelessWidget {
       title:  Text(this.title, style: TextStyle( fontSize: 15)),
       trailing:  Text(this.trailing),
       contentPadding: EdgeInsets.only(right: 15, left: 15),
-      dense: true
+      dense: true,
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          '/todoListRoute',
+          arguments: TodoListRouteArguments('Ideas', true)
+        );
+      }
     );
   }
 }
