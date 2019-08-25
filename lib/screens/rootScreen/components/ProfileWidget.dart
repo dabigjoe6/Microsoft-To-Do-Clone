@@ -13,6 +13,7 @@ class ProfileWidget extends StatelessWidget {
            ActionWidget()
         ],
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
       )
     );
   }
