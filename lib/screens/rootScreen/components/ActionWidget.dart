@@ -13,7 +13,7 @@ class ActionWidget extends StatelessWidget {
             icon: Icon(Icons.search, size: 33),
             tooltip: 'Search',
             onPressed: () {
-              Navigator.pushNamed(context, '/searchRoute');
+              Navigator.pushNamed(context, 'searchRoute');
             }
           )
         ),   
@@ -25,7 +25,7 @@ class ActionWidget extends StatelessWidget {
             icon: Icon(Icons.settings, size: 33),
             tooltip: 'Settings',
             onPressed: () {
-              Navigator.pushNamed(context, '/settingsRoute');
+              Navigator.pushNamed(context, 'settingsRoute');
             }
           )
         )    

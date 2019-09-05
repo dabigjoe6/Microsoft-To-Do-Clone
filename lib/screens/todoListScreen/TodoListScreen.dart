@@ -14,20 +14,31 @@ class TodoListScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            TitleBarWidget(
-              title: title,
-              isNormalList: isNormalList
-            ),
-            Expanded(
-              child: TodoItemsListWidget(
-                title: title
-              )
-            )
-          ]
-        )
-      )
+        backgroundColor: Color.fromRGBO(0, 0, 0, 1),
+        body: CustomScrollView(
+        slivers: <Widget>[
+          TitleBarWidget(isNormalList: isNormalList, title: title),
+          TodoItemsListWidget(title: title,)
+        ]
+      ))
     );
+
+    // return SafeArea(
+    //   child: Scaffold(
+    //     body: Column(
+    //       children: <Widget>[
+    //         TitleBarWidget(
+    //           title: title,
+    //           isNormalList: isNormalList
+    //         ),
+    //         Expanded(
+    //           child: TodoItemsListWidget(
+    //             title: title
+    //           )
+    //         )
+    //       ]
+    //     )
+    //   )
+    // );
   }
 }

@@ -20,7 +20,7 @@ class TodoListWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          '/todoListRoute',
+          'todoListRoute',
           arguments: TodoListRouteArguments('Ideas', true)
         );
       }

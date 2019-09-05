@@ -14,9 +14,9 @@ class RootApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => RootScreen(),
-        '/searchRoute': (context) => SearchScreen(),
-        '/todoListRoute': (context) => TodoListScreen(),
-        '/settingsRoute': (context) => SettingsScreen()
+        'searchRoute': (context) => SearchScreen(),
+        'todoListRoute': (context) => TodoListScreen(),
+        'settingsRoute': (context) => SettingsScreen()
       },   
     );
   }
