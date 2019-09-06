@@ -10,19 +10,16 @@ class TodoItemsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          if(index % 2 == 0) {
-                    return TodoItemWidget();
-
-          } else {
-            return Divider(color: Colors.blueGrey, indent: 25, endIndent: 25);
-          }
-        },
-        childCount: 25,
-
-      )
-    );
+        delegate: SliverChildBuilderDelegate(
+      (BuildContext context, int index) {
+        if (index % 2 == 0) {
+          return TodoItemWidget();
+        } else {
+          return Divider(color: Colors.blueGrey, indent: 25, endIndent: 25);
+        }
+      },
+      childCount: 25,
+    ));
   }
 
   // @override
