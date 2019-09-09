@@ -9,62 +9,85 @@ class TodoItemWidgetState extends State<TodoItemWidget>
     with TickerProviderStateMixin {
   PageController _pageController;
 
-  AnimationController _animationController;
-  Animation<double> animation;
-  Animation<double> animationPosRight;
-  Animation<double> animationPosBottom;
+  double position;
+  double positionBottom;
+  double positionRight;
+
+  void _onScroll() {
+
+    if (_pageController.page <= 0.661) {
+      setState(() {
+        position = PageMoveInterpolate.position(_pageController.page);
+        positionRight = PageMoveInterpolate.posRight(_pageController.page);
+        positionBottom = PageMoveInterpolate.posBottom(_pageController.page);
+      });
+    }
+
+    if (_pageController.page >= 1.4) {
+      setState(() {
+        position = PageMoveInterpolate.position(_pageController.page, true);
+        positionRight =
+            PageMoveInterpolate.posRight(_pageController.page, true);
+        positionBottom =
+            PageMoveInterpolate.posBottom(_pageController.page, true);
+      });
+    }
+
+    if (_pageController.page > 0.661 && _pageController.page < 1.4) {
+      setState(() {
+        position = 0;
+        positionRight = 25;
+        positionBottom = 15;
+      });
+    }
+
+  }
 
   @override
   void initState() {
     super.initState();
 
-    _pageController = PageController(initialPage: 1);
-    _animationController =
-        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _pageController = PageController(initialPage: 1)..addListener(_onScroll);
 
-    animationPosRight = Tween<double>(begin: 27, end: -800).animate(_animationController);
-    animationPosBottom = Tween<double>(begin: 17, end: -100).animate(_animationController);
-
-    animation = Tween<double>(begin: 10, end: 2000).animate(_animationController)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((AnimationStatus status) {
-        if(status == AnimationStatus.completed) {
-          _animationController.reverse();
-        } else if(status == AnimationStatus.dismissed) {
-          _animationController.forward();
-        }
-      });
-
-      _animationController.forward();
+    position = 0;
+    positionRight = 25;
+    positionBottom = 15;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Listener(
+      onPointerDown: ((PointerDownEvent event) {
+
+        print('HERE!');
+      }),
+      onPointerUp: ((PointerUpEvent event) {
+        print('UP!');
+      }),
+      child: Container(
         height: 50,
         child: PageView(controller: _pageController, children: <Widget>[
           Stack(children: <Widget>[
             Container(
               height: 50,
               width: MediaQuery.of(context).size.width,
-              color: Colors.blue,
+              color: Color.fromRGBO(68, 68, 68, 0.5),
               padding: EdgeInsets.only(right: 10),
             ),
             Positioned(
-                height: animation.value,
-                width: animation.value,
-                right: animationPosRight.value,
-                bottom: animationPosBottom.value,
+                height: position,
+                width: position,
+                right: positionRight,
+                bottom: positionBottom, //psitionRight,
+                // bottom: positionBottom,
                 child: Container(
                     // constraints: BoxConstraints.loose(Size.fromRadius(100)),
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.red))),
+                        shape: BoxShape.circle, color: Colors.blue))),
             Positioned(
                 right: 20,
                 bottom: 10,
-                child: Icon(Icons.brightness_7))
+                child: Icon(Icons.brightness_7, color: Colors.white))
           ]),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -92,14 +115,14 @@ class TodoItemWidgetState extends State<TodoItemWidget>
             Container(
               height: 50,
               width: MediaQuery.of(context).size.width,
-              color: Colors.blue,
+              color: Color.fromRGBO(68, 68, 68, 0.5),
               padding: EdgeInsets.only(right: 10),
             ),
             Positioned(
-                height: animation.value,
-                width: animation.value,
-                left: animationPosRight.value,
-                bottom: animationPosBottom.value,
+                height: position,
+                width: position,
+                left: positionRight,
+                bottom: positionBottom,
                 child: Container(
                     // constraints: BoxConstraints.loose(Size.fromRadius(100)),
                     decoration: BoxDecoration(
@@ -107,15 +130,61 @@ class TodoItemWidgetState extends State<TodoItemWidget>
             Positioned(
                 left: 20,
                 bottom: 10,
-                child: Icon(Icons.restore_from_trash))
+                child: Icon(Icons.restore_from_trash, color: Colors.white))
           ]),
-        ]));
+        ])));
   }
 
   void dispose() {
     super.dispose();
 
     _pageController.dispose();
-    _animationController.dispose();
+  }
+}
+
+class PageMoveInterpolate {
+  static double x0;
+  static double x1;
+  static double position_y1 = 2000;
+  static double position_y0 = 15;
+  static double right_y1 = -666.5;
+  static double right_y0 = 25;
+  static double bottom_y1 = -600;
+  static double bottom_y0 = 15;
+
+  static position(double page, [bool inverse]) {
+    if (inverse == true) {
+      x0 = 1.4;
+      x1 = 2;
+    } else {
+      x0 = 0.661;
+      x1 = 0;
+    }
+    //x0 = 1 and x1 = 0, position_y0 = 15 and position_y1 = 2000
+    return ((position_y0 * (x1 - page)) + (position_y1 * (page - x0))) /
+        (x1 - x0);
+  }
+
+  static posRight(double page, [bool inverse]) {
+    if (inverse == true) {
+      x0 = 1.4;
+      x1 = 2;
+    } else {
+      x0 = 0.661;
+      x1 = 0;
+    }
+    return ((right_y0 * (x1 - page)) + (right_y1 * (page - x0))) / (x1 - x0);
+  }
+
+  static posBottom(double page, [bool inverse]) {
+    if (inverse == true) {
+      x0 = 1.4;
+      x1 = 2;
+    } else {
+      x0 = 0.661;
+      x1 = 0;
+    }
+
+    return ((bottom_y0 * (x1 - page)) + (bottom_y1 * (page - x0))) / (x1 - x0);
   }
 }

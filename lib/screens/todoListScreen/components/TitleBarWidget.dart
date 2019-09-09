@@ -21,8 +21,8 @@ class TitleBarWidget extends StatelessWidget {
           icon: Icon(Icons.person_add),
           onPressed: () {}
         ),
-        FlatButton(
-          child: Text('SHARE'),
+        IconButton(
+          icon: Icon(Icons.share,),
           onPressed: () {}
         ),
         IconButton(
