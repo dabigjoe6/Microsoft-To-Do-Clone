@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:microsoft_todo/screens/todoScreen/TodoScreen.dart';
 
 class TodoItemWidget extends StatefulWidget {
 
@@ -68,7 +69,14 @@ class TodoItemWidgetState extends State<TodoItemWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
+    return FlatButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TodoScreen())
+        );
+      },
+      child: Listener(
         onPointerDown: ((PointerDownEvent event) {
           print('HERE!');
         }),
@@ -143,14 +151,14 @@ class TodoItemWidgetState extends State<TodoItemWidget>
                       left: 20,
                       bottom: 10,
                       child:
-                          Icon(Icons.restore_from_trash, color: Colors.white))
+                          Icon(Icons.delete, color: Colors.white))
                 ])
               ])),
               AnimatedOpacity(
               child: Divider(color: Colors.blueGrey, indent: 25, endIndent: 25),
               opacity: dividerOpacity,
               duration: Duration(milliseconds: 500))
-        ]));
+        ])));
   }
 
   void dispose() {
