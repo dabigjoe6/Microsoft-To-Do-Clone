@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TodoItemWidget extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() => TodoItemWidgetState();
 }
 
 class TodoItemWidgetState extends State<TodoItemWidget>
     with TickerProviderStateMixin {
+  dynamic dividerVisibility;
+
+  double dividerOpacity = 1;
+
   PageController _pageController;
 
   double position;
@@ -14,8 +19,10 @@ class TodoItemWidgetState extends State<TodoItemWidget>
   double positionRight;
 
   void _onScroll() {
-
     if (_pageController.page <= 0.661) {
+
+      dividerOpacity = 0;
+
       setState(() {
         position = PageMoveInterpolate.position(_pageController.page);
         positionRight = PageMoveInterpolate.posRight(_pageController.page);
@@ -24,6 +31,9 @@ class TodoItemWidgetState extends State<TodoItemWidget>
     }
 
     if (_pageController.page >= 1.4) {
+
+      dividerOpacity = 0;
+
       setState(() {
         position = PageMoveInterpolate.position(_pageController.page, true);
         positionRight =
@@ -34,13 +44,15 @@ class TodoItemWidgetState extends State<TodoItemWidget>
     }
 
     if (_pageController.page > 0.661 && _pageController.page < 1.4) {
+      
+      dividerOpacity = 1;
+
       setState(() {
         position = 0;
         positionRight = 25;
         positionBottom = 15;
       });
     }
-
   }
 
   @override
@@ -57,82 +69,88 @@ class TodoItemWidgetState extends State<TodoItemWidget>
   @override
   Widget build(BuildContext context) {
     return Listener(
-      onPointerDown: ((PointerDownEvent event) {
-
-        print('HERE!');
-      }),
-      onPointerUp: ((PointerUpEvent event) {
-        print('UP!');
-      }),
-      child: Container(
-        height: 50,
-        child: PageView(controller: _pageController, children: <Widget>[
-          Stack(children: <Widget>[
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              color: Color.fromRGBO(68, 68, 68, 0.5),
-              padding: EdgeInsets.only(right: 10),
-            ),
-            Positioned(
-                height: position,
-                width: position,
-                right: positionRight,
-                bottom: positionBottom, //psitionRight,
-                // bottom: positionBottom,
-                child: Container(
-                    // constraints: BoxConstraints.loose(Size.fromRadius(100)),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.blue))),
-            Positioned(
-                right: 20,
-                bottom: 10,
-                child: Icon(Icons.brightness_7, color: Colors.white))
-          ]),
+        onPointerDown: ((PointerDownEvent event) {
+          print('HERE!');
+        }),
+        onPointerUp: ((PointerUpEvent event) {
+          print('UP!');
+        }),
+        child: Column(children: <Widget>[
           Container(
-            width: MediaQuery.of(context).size.width,
-            child: ListTile(
-                leading: IconButton(
-                    icon: Icon(Icons.check_box_outline_blank,
-                        color: Colors.white),
-                    onPressed: () {
-                      //Do nothing for now
-                    }),
-                title: Text('The task you set to do',
-                    style: TextStyle(fontSize: 16, color: Colors.white)),
-                trailing: IconButton(
-                    icon: Icon(Icons.star_border, color: Colors.white),
-                    onPressed: () {
-                      //Do nothing for now
-                    }),
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                dense: false,
-                onTap: () {
-                  //Do nothing for now
-                }),
-          ),
-          Stack(children: <Widget>[
-            Container(
               height: 50,
-              width: MediaQuery.of(context).size.width,
-              color: Color.fromRGBO(68, 68, 68, 0.5),
-              padding: EdgeInsets.only(right: 10),
-            ),
-            Positioned(
-                height: position,
-                width: position,
-                left: positionRight,
-                bottom: positionBottom,
-                child: Container(
-                    // constraints: BoxConstraints.loose(Size.fromRadius(100)),
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.red))),
-            Positioned(
-                left: 20,
-                bottom: 10,
-                child: Icon(Icons.restore_from_trash, color: Colors.white))
-          ]),
-        ])));
+              child: PageView(controller: _pageController, children: <Widget>[
+                Stack(children: <Widget>[
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    color: Color.fromRGBO(68, 68, 68, 0.5),
+                    padding: EdgeInsets.only(right: 10),
+                  ),
+                  Positioned(
+                      height: position,
+                      width: position,
+                      right: positionRight,
+                      bottom: positionBottom, //psitionRight,
+                      // bottom: positionBottom,
+                      child: Container(
+                          // constraints: BoxConstraints.loose(Size.fromRadius(100)),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.blue))),
+                  Positioned(
+                      right: 20,
+                      bottom: 10,
+                      child: Icon(Icons.brightness_7, color: Colors.white))
+                ]),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: ListTile(
+                      leading: IconButton(
+                          icon: Icon(Icons.check_box_outline_blank,
+                              color: Colors.white),
+                          onPressed: () {
+                            //Do nothing for now
+                          }),
+                      title: Text('The task you set to do',
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
+                      trailing: IconButton(
+                          icon: Icon(Icons.star_border, color: Colors.white),
+                          onPressed: () {
+                            //Do nothing for now
+                          }),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                      dense: false,
+                      onTap: () {
+                        //Do nothing for now
+                      }),
+                ),
+                Stack(children: <Widget>[
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    color: Color.fromRGBO(68, 68, 68, 0.5),
+                    padding: EdgeInsets.only(right: 10),
+                  ),
+                  Positioned(
+                      height: position,
+                      width: position,
+                      left: positionRight,
+                      bottom: positionBottom,
+                      child: Container(
+                          // constraints: BoxConstraints.loose(Size.fromRadius(100)),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.red))),
+                  Positioned(
+                      left: 20,
+                      bottom: 10,
+                      child:
+                          Icon(Icons.restore_from_trash, color: Colors.white))
+                ])
+              ])),
+              AnimatedOpacity(
+              child: Divider(color: Colors.blueGrey, indent: 25, endIndent: 25),
+              opacity: dividerOpacity,
+              duration: Duration(milliseconds: 500))
+        ]));
   }
 
   void dispose() {
