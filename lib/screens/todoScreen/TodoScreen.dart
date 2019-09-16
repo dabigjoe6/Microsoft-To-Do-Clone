@@ -4,7 +4,7 @@ class TodoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black,
         appBar: AppBar(
             backgroundColor: Colors.transparent,
@@ -12,7 +12,9 @@ class TodoScreen extends StatelessWidget {
             title: Text('Ideas'),
             leading:
                 IconButton(icon: Icon(Icons.arrow_back), onPressed: () {})),
-        body: Column(children: <Widget>[
+        body: Center(
+          child: SingleChildScrollView(
+          child: Column(children: <Widget>[
           Container(
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Row(
@@ -62,8 +64,7 @@ class TodoScreen extends StatelessWidget {
                       children: <Widget>[Container(child: Icon(Icons.file_upload, color: Colors.white), margin: EdgeInsets.only(right: 20)), Text('Add file', style: TextStyle(color: Colors.white, fontSize: 17))]),
                   onPressed: () {})),
           Container(child: TextField(autocorrect: true, expands: true, maxLines: null, minLines: null), height: 40),
-           Expanded(
-            child: Align(
+         Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +72,8 @@ class TodoScreen extends StatelessWidget {
                     Text('Created on Tue, Aug, 20'),
                     IconButton(icon: Icon(Icons.delete), onPressed: () {})
                   ],
-                )))
-        ]));
+                ))
+        ])
+        )));
   }
 }
