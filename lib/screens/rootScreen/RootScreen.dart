@@ -14,7 +14,26 @@ class RootScreen extends StatelessWidget {
               ProfileWidget(),
               Divider(),
               Expanded (
+                flex: 8,
                 child: TodoWidget()
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(padding: EdgeInsets.symmetric(horizontal: 10), child:  Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.add)),
+                        Text('New list', style: TextStyle(fontSize: 15))
+                      ]
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.add_to_photos),
+                      onPressed: (() {})
+                    )
+                  ]
+                ))
               )],
               mainAxisAlignment: MainAxisAlignment.start
           )
