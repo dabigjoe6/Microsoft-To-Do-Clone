@@ -10,7 +10,7 @@ class ActionWidget extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 30),
           child: IconButton(
             padding: EdgeInsets.only(top: 0),
-            icon: Icon(Icons.search, size: 33),
+            icon: Icon(Icons.search, size: 33, color: Colors.white),
             tooltip: 'Search',
             onPressed: () {
               Navigator.pushNamed(context, 'searchRoute');
@@ -22,7 +22,7 @@ class ActionWidget extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 30),
           child: IconButton(
             padding: EdgeInsets.only(top: 0),
-            icon: Icon(Icons.settings, size: 33),
+            icon: Icon(Icons.settings, size: 33, color: Colors.white),
             tooltip: 'Settings',
             onPressed: () {
               Navigator.pushNamed(context, 'settingsRoute');

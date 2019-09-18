@@ -16,7 +16,7 @@ class DisplayUserWidget extends StatelessWidget {
           child: Text(
             'Joseph Olabisi', 
             style: TextStyle(
-              // color: Colors.white,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 18
             )

@@ -11,7 +11,9 @@ class TodoScreen extends StatelessWidget {
             elevation: 0,
             title: Text('Ideas'),
             leading:
-                IconButton(icon: Icon(Icons.arrow_back), onPressed: () {})),
+                IconButton(icon: Icon(Icons.arrow_back), onPressed: () {
+                  Navigator.pop(context);
+                })),
         body: Center(
             child: SingleChildScrollView(
                 child: 

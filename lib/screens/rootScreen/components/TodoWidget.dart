@@ -11,7 +11,7 @@ class TodoWidget extends StatelessWidget {
           TodoListWidget(Icons.calendar_today, 'Planned', ''),
           TodoListWidget(Icons.person_pin, 'Assigned to Me', ''),
           TodoListWidget(Icons.home, 'Task', '17'),
-          Divider(),
+          Divider(color: Colors.grey),
           TodoListWidget(Icons.format_list_bulleted, 'Ideas', '23')
         ]
     );

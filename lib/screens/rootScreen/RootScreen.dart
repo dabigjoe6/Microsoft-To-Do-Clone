@@ -6,13 +6,13 @@ class RootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // backgroundColor: const Color.fromRGBO(36, 36, 38, 0.0),
+        backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
               children: <Widget>[
               //User profile
               ProfileWidget(),
-              Divider(),
+              Divider(color: Colors.grey),
               Expanded (
                 flex: 8,
                 child: TodoWidget()
@@ -24,12 +24,12 @@ class RootScreen extends StatelessWidget {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.add)),
-                        Text('New list', style: TextStyle(fontSize: 15))
+                        Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.add, color: Colors.white)),
+                        Text('New list', style: TextStyle(fontSize: 15, color: Colors.white))
                       ]
                     ),
                     IconButton(
-                      icon: Icon(Icons.add_to_photos),
+                      icon: Icon(Icons.add_to_photos, color: Colors.white),
                       onPressed: (() {})
                     )
                   ]
